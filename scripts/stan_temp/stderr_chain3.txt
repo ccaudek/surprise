@@ -1,0 +1,4 @@
+Error in new_CppObject_xp(fields$.module, fields$.pointer, ...) : 
+  Exception: mismatch in dimension declared and found in context; processing stage=data initialization; variable name=B; position=0; dims declared=(240,2); dims found=(243,2)  (in 'model63a311c1217_er_rt_faster_robust' at line 29)
+
+failed to create the sampler; sampling not done

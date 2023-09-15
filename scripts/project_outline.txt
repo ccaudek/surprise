@@ -1,0 +1,61 @@
+#' # Outline
+#' 
+#' ## Cognitive model of surprise (?) - review from Reisenzein, Horstmann, & Sch€utzwohl (2017)
+#' 
+#' (from Macedo & Cardoso, 2017)
+#' surprising-eliciting events initiate a series of mental processes that 
+#' (a) begin with the appraisal of a cognized event as exceeding some threshold of unexpectedness 
+#' or schema discrepancy, (b) continue with the interruption of ongoing information processing and 
+#' the reallocation of processing resources to the surprise-eliciting event and the conscious 
+#' experience of surprise, and (c) culminate in the analysis and evaluation of the unexpected event 
+#' plus immediate reactions to it and/or schema (belief) updating. 
+#' 
+#' According to Meyer, Reisenzein, and Sch€utzwohl (1997), the function of the surprise mechanism 
+#' in humans is to focus attention on the unexpected event and to instigate its exploration, and 
+#' thereby to promote both immediate adaptive actions to the unexpected event and the prediction, 
+#' control and effective dealings with future occurrences of the event. Because of these functional 
+#' effects of surprise, it is widely assumed that surprise plays an important role in the control of 
+#' human attention.
+#' 
+#' The computational models of surprise proposed by Itti and Baldi (2006) and Peters (1998) focus on 
+#' the role of surprise in visual attention (the perception of objects, move- ments, or scenes) and 
+#' are mainly concerned with the detection of unexpected events and the computation of surprise 
+#' intensity. For example, central to Itti and Baldi (2006) sur- prise model is the proposal to 
+#' compute surprise intensity as the distance between the prior probability distribution over a set 
+#' of hypotheses and the posterior distribution resulting from the Bayesian updating of the prior 
+#' distribution on the basis of new information.
+#' 
+#' Although Itti and Baldi (2006) speak about “beliefs” and “belief-updating,” they focus on low-level 
+#' perceptual representations and perceptual mismatch, recent research suggests that perceptual 
+#' mismatch per se is insufficient for surprise in humans. In line with this, most surprise theorists 
+#' assume that surprise results from the disconfirmation of beliefs in the full sense of the word, 
+#' that is, doxastic propositional representations. Therefore, models of surprise need to take 
+#' these higher level representations into account.
+#' 
+#' the computational models of surprise proposed by Macedo et al. and Lorini and Castelfranchi (2007) 
+#' conceptualize surprise as a reaction to the disconfirmation of expectations or, more generally, 
+#' beliefs, understood as propositional attitudes. 
+#' 
+#' Many computational models of surprise (e.g., Itti & Baldi, 2006) share the assumption that surprise 
+#' is computed, in one way or other, from event representations that can be meaningfully said to 
+#' encode the probabilities of the events. Instead, Maguire, Maguire, and Keane (2011) have linked 
+#' surprise to the difficulty of finding an explanation for events. Specifically, these authors 
+#' propose that the intensity of surprise is a function of the degree of cognitive effort needed to 
+#' explain an event. 
+#' 
+#' In our case, this hypothesis makes sense by considering that we find non differences between the 
+#' surprising and non-surprising trials in the Surprise experiment. In other words, it seems that
+#' surprise triggers a difference way to elaborate the information and this 'set' is not an
+#' instantaneous change.
+#' 
+#' 
+#' Whenever new information about the present, past, or future state of the world becomes known to the 
+#' agent, there is the potential for an inconsistency or conflict between this information and the 
+#' agent’s assumptions or expectations. We assume that the detection of this inconsistency gives rise 
+#' to surprise as well as to a process of belief-updating (belief revision). 
+#' There are different dimensions in the discussion of the surprise phenomenon: (1) the computation of 
+#' surprise intensity; (2) the belief-updating process; (3) the question of how the intensity of 
+#' surprise decays over time.
+#' 
+#' 
+
