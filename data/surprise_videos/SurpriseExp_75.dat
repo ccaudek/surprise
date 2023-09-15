@@ -1,0 +1,8 @@
+subject_name subjectNumber iTrial unshuffled_trial targetOrientation flankersOrientation response correct onscreen_stim_duration magicShows rt date time_of_day deltaX deltaY surpriseClip isClipTrial
+54as25_f21 75 1 43 -45 45 left 1 5.000000e-01 /Users/lab/Documents/surprise_project/surprise/stim/6_effect.mov 1949 19-Mar-2018 12:33:37 2.326546e+02 -3.368528e+02 1 1
+54as25_f21 75 2 9 45 45 right 1 5.000000e-01 /Users/lab/Documents/surprise_project/surprise/stim/2_effect.mov 1532 19-Mar-2018 12:33:41 -3.763348e+02 1.688508e+02 1 0
+54as25_f21 75 3 34 45 -45 right 1 5.000000e-01 /Users/lab/Documents/surprise_project/surprise/stim/5_effect.mov 1401 19-Mar-2018 12:33:44 -1.532439e+02 -1.271640e+02 1 0
+54as25_f21 75 4 68 -45 -45 left 1 5.000000e-01 /Users/lab/Documents/surprise_project/surprise/stim/9_effect.mov 1096 19-Mar-2018 12:34:07 -2.628344e+02 4.196837e+01 1 1
+54as25_f21 75 5 42 45 -45 right 1 5.000000e-01 /Users/lab/Documents/surprise_project/surprise/stim/6_effect.mov 883 19-Mar-2018 12:34:10 -4.189812e+02 2.986165e+01 1 0
+54as25_f21 75 6 3 -45 45 left 1 5.000000e-01 /Users/lab/Documents/surprise_project/surprise/stim/1_effect.mov 863 19-Mar-2018 12:34:13 -3.341441e+02 5.727363e+01 1 0
+54as25_f21 75 7 6 45 -45 right 1 5.000000e-01 /Users/lab/Documents/surprise_project/surprise/stim/1_noeffect.mov 751 19-Mar-2018 12:34:16 9.012938e+01 -1.581957e+02 1 0

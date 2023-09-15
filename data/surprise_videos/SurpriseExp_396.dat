@@ -1,0 +1,12 @@
+subject_name subjectNumber iTrial unshuffled_trial targetOrientation flankersOrientation response correct onscreen_stim_duration magicShows rt date time_of_day deltaX deltaY surpriseClip isClipTrial
+01pm23_m25 396 1 28 -45 -45 left 1 5.000000e-01 /Users/lab/Documents/surprise_project/surprise/stim/4_effect.mov 1164 03-Apr-2018 13:31:55 3.275196e+02 -1.232872e+02 1 1
+01pm23_m25 396 2 11 -45 45 left 1 5.000000e-01 /Users/lab/Documents/surprise_project/surprise/stim/2_effect.mov 779 03-Apr-2018 13:31:59 2.913993e+02 1.380321e+02 1 0
+01pm23_m25 396 3 32 -45 -45 left 1 5.000000e-01 /Users/lab/Documents/surprise_project/surprise/stim/4_noeffect.mov 492 03-Apr-2018 13:32:02 1.088956e+02 4.929501e+01 0 0
+01pm23_m25 396 4 70 45 -45 right 1 5.000000e-01 /Users/lab/Documents/surprise_project/surprise/stim/9_noeffect.mov 710 03-Apr-2018 13:32:23 -3.263569e+02 -3.566393e+02 0 1
+01pm23_m25 396 5 65 45 45 right 1 5.000000e-01 /Users/lab/Documents/surprise_project/surprise/stim/9_effect.mov 466 03-Apr-2018 13:32:26 -2.727666e+02 -1.324825e+02 1 0
+01pm23_m25 396 6 40 -45 -45 left 1 5.000000e-01 /Users/lab/Documents/surprise_project/surprise/stim/5_noeffect.mov 595 03-Apr-2018 13:32:29 6.142521e+01 -8.286840e+01 0 0
+01pm23_m25 396 7 30 45 -45 right 1 5.000000e-01 /Users/lab/Documents/surprise_project/surprise/stim/4_noeffect.mov 470 03-Apr-2018 13:32:32 6.439055e+01 -4.438674e+02 0 0
+01pm23_m25 396 8 7 -45 45 left 1 5.000000e-01 /Users/lab/Documents/surprise_project/surprise/stim/1_noeffect.mov 763 03-Apr-2018 13:32:57 4.238864e+02 -1.271167e+02 1 1
+01pm23_m25 396 9 59 -45 45 left 1 5.000000e-01 /Users/lab/Documents/surprise_project/surprise/stim/8_effect.mov 646 03-Apr-2018 13:33:00 -2.810326e+02 -4.775472e+02 1 0
+01pm23_m25 396 10 6 45 -45 right 1 5.000000e-01 /Users/lab/Documents/surprise_project/surprise/stim/1_noeffect.mov 628 03-Apr-2018 13:33:03 6.671309e+01 -3.959782e+02 1 0
+01pm23_m25 396 11 33 45 45 right 1 5.000000e-01 /Users/lab/Documents/surprise_project/surprise/stim/5_effect.mov 490 03-Apr-2018 13:33:06 -1.046294e+02 1.907606e+02 1 0

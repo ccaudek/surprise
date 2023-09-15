@@ -1,0 +1,12 @@
+subject_name subjectNumber iTrial unshuffled_trial targetOrientation flankersOrientation response correct onscreen_stim_duration magicShows rt date time_of_day deltaX deltaY surpriseClip isClipTrial
+97gs11_f19 266 1 27 -45 45 left 1 5.000000e-01 /Users/lab/Documents/surprise_project/surprise/stim/4_effect.mov 1345 26-Mar-2018 09:51:06 7.758038e+01 -1.596741e+02 1 1
+97gs11_f19 266 2 43 -45 45 left 1 5.000000e-01 /Users/lab/Documents/surprise_project/surprise/stim/6_effect.mov 1001 26-Mar-2018 09:51:09 8.918486e+01 4.060069e+01 1 0
+97gs11_f19 266 3 44 -45 -45 left 1 5.000000e-01 /Users/lab/Documents/surprise_project/surprise/stim/6_effect.mov 462 26-Mar-2018 09:51:12 2.008468e+01 2.467420e+02 1 0
+97gs11_f19 266 4 62 45 -45 right 1 5.000000e-01 /Users/lab/Documents/surprise_project/surprise/stim/8_noeffect.mov 1229 26-Mar-2018 09:51:33 2.639121e+02 1.173248e+02 0 1
+97gs11_f19 266 5 6 45 -45 right 1 5.000000e-01 /Users/lab/Documents/surprise_project/surprise/stim/1_noeffect.mov 567 26-Mar-2018 09:51:36 4.226959e+02 3.498192e+02 1 0
+97gs11_f19 266 6 53 45 45 right 1 5.000000e-01 /Users/lab/Documents/surprise_project/surprise/stim/7_noeffect.mov 734 26-Mar-2018 09:51:40 2.481090e+02 -4.029889e+02 0 0
+97gs11_f19 266 7 66 45 -45 right 1 5.000000e-01 /Users/lab/Documents/surprise_project/surprise/stim/9_effect.mov 584 26-Mar-2018 09:51:43 -3.362079e+02 4.785322e+02 1 0
+97gs11_f19 266 8 12 -45 -45 left 1 5.000000e-01 /Users/lab/Documents/surprise_project/surprise/stim/2_effect.mov 851 26-Mar-2018 09:52:08 -1.343727e+02 -4.201304e+01 1 1
+97gs11_f19 266 9 4 -45 -45 left 1 5.000000e-01 /Users/lab/Documents/surprise_project/surprise/stim/1_effect.mov 551 26-Mar-2018 09:52:11 1.558559e+02 2.598371e+02 1 0
+97gs11_f19 266 10 8 -45 -45 left 1 5.000000e-01 /Users/lab/Documents/surprise_project/surprise/stim/1_noeffect.mov 1018 26-Mar-2018 09:52:15 4.597698e+02 -1.050615e+02 1 0
+97gs11_f19 266 11 36 -45 -45 left 1 5.000000e-01 /Users/lab/Documents/surprise_project/surprise/stim/5_effect.mov 851 26-Mar-2018 09:52:18 3.565972e+02 -1.727586e+02 1 0

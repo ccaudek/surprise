@@ -1,0 +1,16 @@
+subject_name subjectNumber iTrial unshuffled_trial targetOrientation flankersOrientation response correct onscreen_stim_duration magicShows rt date time_of_day deltaX deltaY surpriseClip isClipTrial
+82am16_m19 61 1 9 45 45 right 1 5.000000e-01 /Users/lab/Documents/surprise_project/surprise/stim/2_effect.mov 933 19-Mar-2018 09:45:31 -1.644660e+02 6.117514e+01 1 1
+82am16_m19 61 2 38 45 -45 right 1 5.000000e-01 /Users/lab/Documents/surprise_project/surprise/stim/5_noeffect.mov 966 19-Mar-2018 09:45:34 2.553717e+02 1.084264e+02 0 0
+82am16_m19 61 3 8 -45 -45 left 1 5.000000e-01 /Users/lab/Documents/surprise_project/surprise/stim/1_noeffect.mov 900 19-Mar-2018 09:45:37 3.274962e+01 -2.944891e+02 1 0
+82am16_m19 61 4 47 -45 45 left 1 5.000000e-01 /Users/lab/Documents/surprise_project/surprise/stim/6_noeffect.mov 1147 19-Mar-2018 09:45:52 4.471040e+02 2.633387e+02 0 1
+82am16_m19 61 5 62 45 -45 right 1 5.000000e-01 /Users/lab/Documents/surprise_project/surprise/stim/8_noeffect.mov 935 19-Mar-2018 09:45:56 -4.661260e+02 1.028774e+01 0 0
+82am16_m19 61 6 58 45 -45 right 1 5.000000e-01 /Users/lab/Documents/surprise_project/surprise/stim/8_effect.mov 819 19-Mar-2018 09:45:59 -9.412914e+00 3.156726e+02 1 0
+82am16_m19 61 7 22 45 -45 right 1 5.000000e-01 /Users/lab/Documents/surprise_project/surprise/stim/3_noeffect.mov 784 19-Mar-2018 09:46:02 -1.538853e+02 1.314613e+02 0 0
+82am16_m19 61 8 61 45 45 right 1 5.000000e-01 /Users/lab/Documents/surprise_project/surprise/stim/8_noeffect.mov 896 19-Mar-2018 09:46:23 4.491732e+02 4.311829e+02 0 1
+82am16_m19 61 9 59 -45 45 left 1 5.000000e-01 /Users/lab/Documents/surprise_project/surprise/stim/8_effect.mov 901 19-Mar-2018 09:46:27 8.289933e+01 -3.684409e+02 1 0
+82am16_m19 61 10 54 45 -45 right 1 5.000000e-01 /Users/lab/Documents/surprise_project/surprise/stim/7_noeffect.mov 868 19-Mar-2018 09:46:30 -3.144729e+02 -3.275950e+02 0 0
+82am16_m19 61 11 27 -45 45 left 1 5.000000e-01 /Users/lab/Documents/surprise_project/surprise/stim/4_effect.mov 884 19-Mar-2018 09:46:33 -3.707852e+02 -1.280306e+02 1 0
+82am16_m19 61 12 16 -45 -45 left 1 5.000000e-01 /Users/lab/Documents/surprise_project/surprise/stim/2_noeffect.mov 1014 19-Mar-2018 09:46:58 4.127597e+02 -1.365823e+01 0 1
+82am16_m19 61 13 13 45 45 right 1 5.000000e-01 /Users/lab/Documents/surprise_project/surprise/stim/2_noeffect.mov 850 19-Mar-2018 09:47:01 1.841731e+02 3.889218e+02 0 0
+82am16_m19 61 14 48 -45 -45 left 1 5.000000e-01 /Users/lab/Documents/surprise_project/surprise/stim/6_noeffect.mov 868 19-Mar-2018 09:47:05 -3.573991e+02 -4.463936e+01 0 0
+82am16_m19 61 15 20 -45 -45 left 1 5.000000e-01 /Users/lab/Documents/surprise_project/surprise/stim/3_effect.mov 984 19-Mar-2018 09:47:08 4.646140e+02 1.487367e+02 1 0

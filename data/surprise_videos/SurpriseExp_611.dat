@@ -1,0 +1,21 @@
+subject_name subjectNumber block iTrial unshuffled_trial targetOrientation flankersOrientation response correct onscreen_stim_duration magicShows rt date time_of_day deltaX deltaY surpriseClip isClipTrial isSurprise
+ma_ro_ 1993_03_23_349_m 611 3 1 1 70 45 -45 NORESP 0 3 /Users/lab/Documents/experiments/2019/surprise/stim/9_noeffect.mov 2998 25-Mar-2019 12:37:23 -2.508943e+02 -7.727111e+01 0 1
+ma_ro_ 1993_03_23_349_m 611 3 2 1 19 -45 45 NORESP 0 3 /Users/lab/Documents/experiments/2019/surprise/stim/3_effect.mov 2999 25-Mar-2019 12:37:29 1.794349e+02 3.455608e+02 1 0
+ma_ro_ 1993_03_23_349_m 611 3 3 1 38 45 -45 NORESP 0 3 /Users/lab/Documents/experiments/2019/surprise/stim/5_noeffect.mov 2999 25-Mar-2019 12:37:34 3.917231e+02 -4.101882e+02 0 0
+ma_ro_ 1993_03_23_349_m 611 3 4 1 41 45 45 NORESP 0 3 /Users/lab/Documents/experiments/2019/surprise/stim/6_effect.mov 2999 25-Mar-2019 12:37:51 -1.466872e+01 2.532600e+02 1 1
+ma_ro_ 1993_03_23_349_m 611 3 5 1 61 45 45 NORESP 0 3 /Users/lab/Documents/experiments/2019/surprise/stim/8_noeffect.mov 3000 25-Mar-2019 12:37:57 -2.426011e+02 -2.742758e+01 0 0
+ma_ro_ 1993_03_23_349_m 611 3 6 1 27 -45 45 NORESP 0 3 /Users/lab/Documents/experiments/2019/surprise/stim/4_effect.mov 2999 25-Mar-2019 12:38:02 3.218177e+02 3.552730e+01 1 0
+ma_ro_ 1993_03_23_349_m 611 3 7 1 37 45 45 NORESP 0 3 /Users/lab/Documents/experiments/2019/surprise/stim/5_noeffect.mov 2999 25-Mar-2019 12:38:07 4.795203e+02 -1.350042e+02 0 0
+ma_ro_ 1993_03_23_349_m 611 3 8 1 14 45 -45 NORESP 0 3 /Users/lab/Documents/experiments/2019/surprise/stim/2_noeffect.mov 3000 25-Mar-2019 12:38:34 2.969517e+02 3.341890e+02 0 1
+ma_ro_ 1993_03_23_349_m 611 3 9 1 22 45 -45 NORESP 0 3 /Users/lab/Documents/experiments/2019/surprise/stim/3_noeffect.mov 2999 25-Mar-2019 12:38:39 -4.280924e+02 3.096848e+02 0 0
+ma_ro_ 1993_03_23_349_m 611 3 10 1 72 -45 -45 NORESP 0 3 /Users/lab/Documents/experiments/2019/surprise/stim/9_noeffect.mov 2999 25-Mar-2019 12:38:44 1.023481e+01 -3.464381e+02 0 0
+ma_ro_ 1993_03_23_349_m 611 3 11 1 10 45 -45 NORESP 0 3 /Users/lab/Documents/experiments/2019/surprise/stim/2_effect.mov 2998 25-Mar-2019 12:38:50 -1.445825e+02 -4.170810e+02 1 0
+ma_ro_ 1993_03_23_349_m 611 3 12 1 29 45 45 NORESP 0 3 /Users/lab/Documents/experiments/2019/surprise/stim/4_noeffect.mov 2999 25-Mar-2019 12:39:09 -4.199356e+02 -4.419458e+02 0 1
+ma_ro_ 1993_03_23_349_m 611 3 13 1 40 -45 -45 NORESP 0 3 /Users/lab/Documents/experiments/2019/surprise/stim/5_noeffect.mov 2999 25-Mar-2019 12:39:14 3.036205e+02 -3.064686e+02 0 0
+ma_ro_ 1993_03_23_349_m 611 3 14 1 71 -45 45 NORESP 0 3 /Users/lab/Documents/experiments/2019/surprise/stim/9_noeffect.mov 3000 25-Mar-2019 12:39:19 2.759928e+02 3.488861e+02 0 0
+ma_ro_ 1993_03_23_349_m 611 3 15 1 16 -45 -45 NORESP 0 3 /Users/lab/Documents/experiments/2019/surprise/stim/2_noeffect.mov 3000 25-Mar-2019 12:39:25 6.062277e+01 3.731289e+02 0 0
+ma_ro_ 1993_03_23_349_m 611 3 16 1 9 45 45 NORESP 0 3 /Users/lab/Documents/experiments/2019/surprise/stim/2_effect.mov 2999 25-Mar-2019 12:39:52 1.570601e+02 -2.813950e+02 1 1
+ma_ro_ 1993_03_23_349_m 611 3 17 1 7 -45 45 NORESP 0 3 /Users/lab/Documents/experiments/2019/surprise/stim/1_noeffect.mov 2998 25-Mar-2019 12:39:57 -1.010270e+01 8.116548e+01 1 0
+ma_ro_ 1993_03_23_349_m 611 3 18 1 58 45 -45 NORESP 0 3 /Users/lab/Documents/experiments/2019/surprise/stim/8_effect.mov 2999 25-Mar-2019 12:40:03 -7.988046e+01 2.797974e+02 1 0
+ma_ro_ 1993_03_23_349_m 611 3 19 1 20 -45 -45 NORESP 0 3 /Users/lab/Documents/experiments/2019/surprise/stim/3_effect.mov 2999 25-Mar-2019 12:40:08 -1.100614e+02 3.572716e+02 1 0
+ma_ro_ 1993_03_23_349_m 611 3 20 1 1 45 45 NORESP 0 3 /Users/lab/Documents/experiments/2019/surprise/stim/1_effect.mov 3000 25-Mar-2019 12:40:35 3.561285e+02 4.542279e+02 1 1
