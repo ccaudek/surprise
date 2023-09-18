@@ -2,10 +2,12 @@
 
 #------------------------------------------------------------------------------
 ### import the relevant data
+
 get_data <- function(){
   
-  # The data have been created with the 01_, 10_, 11_ scripts in 
-  # the present directory.
+  # The raw data have been created with the 01_, 10_, 11_ scripts in 
+  # the present directory. The individual files created by Matlab are
+  # joined in a single file.
   mydata <- read_csv(
     here("data", "processed", "surprise_control_exps.csv")
   )
@@ -24,55 +26,63 @@ generate_random_code <- function(length) {
 #------------------------------------------------------------------------------
 ### tidy the flanker data
 
+# Remove subjects with less than 80% accuracy.
+# Remove RTs < 205 ms or > 1500 ms
+# Remove subjects who did not complete 4 blocks of trials
+# Remove subjects with less than 20 trials per block
+
 tidy_flanker <- function(data){
   
   # Be sure that sequence of trial is in the right order
   df <- data %>%
     dplyr::arrange(subj_id, date, time_of_day)
   
-  # Remove blocks with less than 20 trials.
-  out <- df %>% 
-    group_by(subj_name, block) %>% 
-    summarise(
-      ntrials_per_block = n()
-    )
-  # hist(out$ntrials_per_block)
-  df1 <- left_join(df, out)
-  df2 <- df1[df1$ntrials_per_block > 20, ]
+  # Group the data by subject and block, then filter based on the minimum trials
+  filtered_data <- df %>%
+    group_by(subj_id, block) %>%
+    filter(n() >= 60) %>%
+    ungroup()
   
-  # Remove subjects with less than 100 trials.
-  # add number of trials for each subject
-  df2 <- df2 %>% 
-    group_by(subj_name) %>% 
-    mutate(
-      bysub_n = length(rt)
-    )
-  df3 <- df2 %>%
-    dplyr::filter(bysub_n > 100)
+  # Filter subjects that have at least one block with 60 trials
+  df1 <- filtered_data %>%
+    group_by(subj_id) %>%
+    filter(any(n() >= 60)) %>%
+    ungroup()
   
-  # Remove block 5 and trial_number == 5
-  # technical problems: there should be none.
-  thedat <- df3 %>%
-    dplyr::filter(
-      trials_after_clip != "4" & block < 5
-    )
+  # df1 <- df %>%
+  #   group_by(subj_id, block) %>%
+  #   filter(n() >= 60) %>%
+  #   ungroup() %>%
+  #   group_by(subj_id) %>%
+  #   mutate(total_trials = n()) %>%
+  #   ungroup() %>%
+  #   filter(total_trials <= 320) %>% 
+  #   select(-total_trials)
+  
+  # There are 769 trials in corresponding to RTs measured (starting from 0) 4 
+  # trials after the clip. In all other cases there are only 3 trials (starting 
+  # from 0) after the clip. I keep them.
   
   # Create a random alpha-numeric code of a fixed length for each subject
-  set.seed(123) # Set seed for reproducibility
+  set.seed(123) 
   # Get the unique subject IDs
-  unique_subj_ids <- unique(thedat$subj_id)
+  unique_subj_ids <- unique(df1$subj_id)
   # Generate a unique random code for each unique subject ID
-  unique_codes <- 
-    setNames(as.list(sapply(unique_subj_ids, function(x) generate_random_code(10))), unique_subj_ids)
+  unique_codes <-
+    setNames(
+      as.list(
+        sapply(unique_subj_ids, function(x) generate_random_code(10))
+      ), unique_subj_ids
+    )
   # Create a new column with the random codes, matched to the subj_id column
-  thedat$new_subj_id <- unlist(unique_codes[as.character(thedat$subj_id)])
+  df1$new_subj_id <- unlist(unique_codes[as.character(df1$subj_id)])
   # length(unique(thedat$new_subj_id))
-  thedat$subj_id <- thedat$new_subj_id
-  thedat$new_subj_id <- NULL
+  df1$subj_id <- df1$new_subj_id
+  df1$new_subj_id <- NULL
   
   # Correct movie_id coding.
   part_to_remove <- "/Users/lab/Documents/surprise_project/surprise/stim/"
-  result <- sub(part_to_remove, "", thedat$movie_id)
+  result <- sub(part_to_remove, "", df1$movie_id)
   
   part_to_remove <- "/Users/lab/Documents/magic3Definitivo/stim/"
   result1 <- sub(part_to_remove, "", result)
@@ -95,18 +105,35 @@ tidy_flanker <- function(data){
   part_to_remove <- "/Users/lab/Desktop/Surprise/stim/"
   result7 <- sub(part_to_remove, "", result6)
   
-  thedat$movie_id <- result7
+  df1$movie_id <- result7
+  df1$movie_id <- factor(df1$movie_id)
+  
+  df2 <- df1 |> 
+    dplyr::filter(!is.na(rtTukey) & rt < 1501 & rtTukey > 250)
   
   # data wrangling
-  thedat$experiment <- factor(thedat$experiment)
-  thedat$subj_id <- factor(thedat$subj_id)
-  thedat$resp <- factor(thedat$resp)
-  thedat$movie_id <- factor(thedat$movie_id)
-  thedat$is_surprise_clip <- factor(thedat$is_surprise_clip)
-  thedat$is_clip_trial <- factor(thedat$is_clip_trial)
+  df2$experiment <- factor(df2$experiment)
+  df2$subj_id <- factor(df2$subj_id)
+  df2$resp <- factor(df2$resp)
+  df2$movie_id <- factor(df2$movie_id)
+  df2$is_surprise_clip <- factor(df2$is_surprise_clip)
+  df2$is_clip_trial <- factor(df2$is_clip_trial)
   
-  return(thedat)
+  #' Perform some participants' flanker checks.
+  flanker_accuracy_overall <- get_flanker_accuracy(df2, overall = TRUE)
+  
+  # Get a list of participants who scored below 80% accuracy.
+  accuracy_removal <- flanker_accuracy_overall |>
+    filter(accuracy < 0.79) |>
+    pull(subj_id)
+  
+  # Remove the <80% accuracy participants from the flanker data.
+  df3 <- df2 |>
+    filter(!subj_id %in% accuracy_removal)
+  
+  return(df3)
 }
+
 
 #------------------------------------------------------------------------------
 ### Get the accuracy per participant and condition 

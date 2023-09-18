@@ -5,13 +5,6 @@
 #'     keep_tex: true
 #' ---
 
-# Script name: 20_variational_inference.R
-# Project: surprise with flanker task
-# Script purpose: brms analysis of the congruenty effect
-# @author: Corrado Caudek <corrado.caudek@unifi.it>
-# Date Created: Tue Sep 12 08:39:19 2023
-# Last Modified Date: Fri Sep 15 08:10:18 2023
-
 
 library("here")
 
@@ -21,7 +14,6 @@ suppressPackageStartupMessages({
     library("cmdstanr")
     library("reshape")
     library("devtools")
-    library("mice")
     library("tidybayes")
     library("emmeans")
     library("broom.mixed")
@@ -46,126 +38,41 @@ data <- get_data()
 #' Tidy data
 data_tidy <- tidy_flanker(data)
 
-#' Perform some participants' flanker checks.
-flanker_accuracy_overall <- get_flanker_accuracy(data_tidy, overall = TRUE)
-
-# Get a list of participants who scored below 80% accuracy.
-accuracy_removal <- flanker_accuracy_overall |>
-    filter(accuracy < 0.80) |>
-    pull(subj_id)
-
-length(accuracy_removal)
-# 1
-
-# Remove the <80% accuracy participants from the flanker data.
-flanker_data <- data_tidy |>
-    filter(!subj_id %in% accuracy_removal)
-
-flanker_data |>
-    group_by(experiment, is_surprise_clip) |>
-    summarize(
-        n = n_distinct(subj_id)
-    )
-
-
-sort(unique(flanker_data$bysub_n))
-
-flanker_data_clean <- flanker_data |>
-    dplyr::filter(bysub_n > 240 & bysub_n < 321)
-
-
-# Check number of subjects by condition.
-flanker_data_clean |>
-    group_by(experiment, is_surprise_clip) |>
-    summarize(
-        n = n_distinct(subj_id)
-    )
 
 #' Data wrangling for models' fit
+#' Select experiment
 
-flanker_data_clean |>
-    group_by(experiment) |>
-    summarize(
-        n = n_distinct(subj_id)
-    )
-
-
-#' select experiment
-
-modeling_data_cntl <- flanker_data_clean |>
-    dplyr::filter(experiment == "control")
-
-modeling_data_surprise <- flanker_data_clean |>
-    dplyr::filter(experiment == "surprise")
+modeling_data <- data_tidy |>
+    dplyr::filter(experiment == "control") # surprise
 
 # unique(modeling_data_surprise$subj_id)
 
 
-#' Check whether each subject has a sufficient number of trials in each block
-#' min = 30
-temp <- modeling_data_cntl |>
-    group_by(subj_id, block) |>
-    summarize(
-        n = n_distinct(rt)
-    ) |>
-    as.data.frame()
-hist(temp$n)
-
-#' Check whether each subject has 4 blocks
-temp <- modeling_data_cntl |>
-    group_by(subj_id) |>
-    summarize(
-        n = n_distinct(block)
-    ) |>
-    as.data.frame()
-temp
-
-
 #' Data wrangling
 
-modeling_data_cntl$rt <- modeling_data_cntl$rtTukey / 1000
+modeling_data$rt <- modeling_data$rt / 1000
 
-modeling_data_cntl$subj_id <- factor(modeling_data_cntl$subj_id)
-modeling_data_cntl$subject <- as.integer(modeling_data_cntl$subj_id)
-sort(unique(modeling_data_cntl$subject))
+modeling_data$subj_id <- factor(modeling_data$subj_id)
+modeling_data$subject <- as.integer(modeling_data$subj_id)
 
 # new names for required variables
-modeling_data_cntl$congruency <- 
-  ifelse(modeling_data_cntl$is_congruent_trial == "Congruent", 
+modeling_data$congruency <-
+  ifelse(modeling_data$is_congruent_trial == "Congruent", 
          "congruent", "incongruent")
-modeling_data_cntl$accuracy <- modeling_data_cntl$correct
+modeling_data$accuracy <- modeling_data$correct
 
-mod_data_cntl <- modeling_data_cntl |>
-  dplyr::select(subject, block, congruency, accuracy, rt)
-mod_data_cntl$subj_name <- NULL
+input_data <- modeling_data |>
+  dplyr::select(subject, block, congruency, accuracy, rt) |> 
+  ungroup()
 
-#' Remove NAs
-complete_rows <- complete.cases(mod_data_cntl)
-dd <- mod_data_cntl[complete_rows, ]
-
-
-
-#' select block
-# BLOCK <- 1
-# modeling_data_cntl_blk <- modeling_data_cntl |>
-#   dplyr::filter(block == BLOCK)
-
-# Small test
-temp <- dd[dd$subject %in% c(1, 2), ]
-dim(temp)
-
-#' set some parameters for the model fit routines
 
 #' during the fit, how many sets of starting parameters should be explored?
 n_start_parms <- 50
-
 #' what should the variance across starting parameters be?
 var_start_parms <- 20
-
 #' how many trials to simulate during each iteration of the fit routine whilst
 #' exploring multiple starting parameters?
 n_first_pass <- 1000
-
 #' how many trials to simulate during the final fit routine?
 n_final_pass <- 50000
 
@@ -173,8 +80,9 @@ n_final_pass <- 50000
 
 #' DSTP Model
 
-# Data
-dd <- temp
+# Sorted data
+dd <- input_data %>%
+  arrange(subject, block)
 
 # Create an empty list to store results
 res_dstp_control <- list()
