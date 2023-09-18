@@ -49,16 +49,6 @@ tidy_flanker <- function(data){
     filter(any(n() >= 60)) %>%
     ungroup()
   
-  # df1 <- df %>%
-  #   group_by(subj_id, block) %>%
-  #   filter(n() >= 60) %>%
-  #   ungroup() %>%
-  #   group_by(subj_id) %>%
-  #   mutate(total_trials = n()) %>%
-  #   ungroup() %>%
-  #   filter(total_trials <= 320) %>% 
-  #   select(-total_trials)
-  
   # There are 769 trials in corresponding to RTs measured (starting from 0) 4 
   # trials after the clip. In all other cases there are only 3 trials (starting 
   # from 0) after the clip. I keep them.
