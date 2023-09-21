@@ -1,0 +1,221 @@
+---
+documentclass     : "apa7"
+title             : "The effect of surprise on cognitive control"
+shorttitle        : "Surprise and cognitive control"
+
+author:
+  - name          : "Francesco Ceccarini"
+    affiliation   : "1"
+    corresponding : yes
+    address       : "NEUROFARBA Department, Psychology Section, University of Firenze, Italy" 
+    email         : "X"
+    role:         # Contributorship roles (e.g., CRediT, https://casrai.org/credit/)
+      - "Conceptualization"
+      - "Writing - Original Draft Preparation"
+      - "Writing - Review & Editing"
+  - name          : "Ilaria Colpizzi"
+    affiliation   : "1"
+  - name          : "Claudio Sica"
+    affiliation   : "2"
+  - name          : "Corrado Caudek"
+    affiliation   : "1"
+    corresponding : yes
+    address       : "NEUROFARBA Department, Psychology Section, University of Firenze, Italy" 
+    email         : "corrado.caudek@unifi.it"
+    role:         # Contributorship roles (e.g., CRediT, https://casrai.org/credit/)
+      - "Conceptualization"
+      - "Writing - Original Draft Preparation"
+      - "Writing - Review & Editing"
+affiliation:
+  - id            : "1"
+    institution   : "NEUROFARBA Department, Psychology Section, University of Florence, Italy"
+  - id            : "2"
+    institution   : "Health Sciences Department, Psychology Section, University of Florence, Italy"
+
+authornote: |
+  Add complete departmental affiliations for each author here. Each new line herein must be indented, like this line.
+
+  Enter author note here.
+
+abstract: |
+  This study investigates ...
+  
+  <!-- https://tinyurl.com/ybremelq -->
+  
+keywords          : "keywords"
+wordcount         : "X"
+
+bibliography      : "bibliography.bib"
+
+floatsintext      : no
+linenumbers       : yes
+draft             : no
+mask              : no
+
+figurelist        : no
+tablelist         : no
+footnotelist      : no
+
+extra_dependencies: ["xcolor"]
+editor_options: 
+  chunk_output_type: inline
+  markdown: 
+    wrap: sentence
+
+preamble: 
+  \usepackage{amsmath}
+  \raggedbottom
+
+classoption       : "man"
+output            : papaja::apa6_pdf
+---
+
+```{r setup, include = FALSE}
+library("papaja")
+r_refs("r-references.bib")
+```
+
+```{r analysis-preferences}
+# Seed for random number generation
+set.seed(42)
+knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
+```
+
+
+
+## Purpose of the study
+
+The purpose of this study is to ...
+
+# Methods
+
+
+## Sample size
+
+## Participants
+
+## Material
+
+## Procedure
+
+## Data analysis
+
+## Statistical analyses
+
+### Quality checks and data exclusion
+
+Prior to data analysis, we implemented a series of data quality assessments. Specifically, participants exhibiting a mean accuracy score below 80% were excluded from the analysis. In the context of reaction time (RT) analysis, error trials were eliminated, and RT values falling below 250 ms or exceeding 1500 ms were trimmed from the dataset.
+
+### Analytical strategy
+
+We performed all inferential analyses using Bayesian regression implemented with the brms package (Bürkner, 2017) in R (R Core Team, 2017). In all our analyses, we employed the default regularizing priors provided by the brms package. Predictor variables were considered has having a credible effect if their 95% credible intervals (CI) did not encompass zero. 
+
+### Modelling attentional selectivity
+
+In order to gain a more comprehensive understanding of the impact of surprise on performance in the flanker task, we employed the dual-stage two-phase (DSTP) model proposed by @hubner2010dual. This model was designed to simultaneously account for both reaction time (RT) and accuracy performance, thereby enabling us to capture the complete dynamics of attentional selectivity in our analysis. It is worth noting that other models have been developed to explore how conflicting information influences decision-making within the context of the flanker task, including the shrinking spotlight model by White et al. [@white2011diffusion], and the diffusion model for conflict tasks (DMC) [@ulrich2015automatic]. In our current study, we opted for the DSTP model for several reasons. First, in a direct comparison conducted by @evans2020comparison, it was demonstrated that, when applied to flanker task data, the DMC model yielded a poorer fit to the observed data compared to both the DSTP and SPS models, whereas the DSTP and SPS models exhibited comparable goodness of fit.  Our preference for the DSTP model over the SPS model was motivated by the fact that the parameters of the DSTP model offer a more direct insight into the processing distinctions between the target stimulus and the flanking stimuli, which aligns closely with the primary focus of our investigation.
+
+The DSTP model, along with the SPS and DMC models, operates on the assumption that response selection follows a drift-diffusion process. This process is divided into two phases, each represented by a diffusion process. A diffusion process is characterized by a drift rate parameter reflecting evidence for response options, along with boundary parameters indicating response boundaries. The model's response accuracy depends on which boundary is reached, while the time to reach the boundary corresponds to RT.
+
+TODO Parameter A!!
+
+The parameter "C" represents the threshold or boundary that must be reached before a decision is made. In simpler terms, it's like a decision-making threshold that participants establish for themselves. When sensory evidence accumulates and reaches this threshold, a response is initiated.
+
+The DSTP model divides the process of making a response into two phases. These phases represent different stages of decision-making. In the first phase of response selection, the brain gathers information from the sensory input, which includes both the central target and the surrounding flankers. Within this first phase, the model considers two  pieces of information: the central target ($\mu_{\text{TA}}$) and the flankers ($\mu_{\text{FL}}$). The total rate of evidence accumulation in Phase 1 is represented as $\mu_{\text{RS1}}$ is the sum of the drift rates for the central target ($\mu_{\text{TA}}$) and the flankers ($\mu_{\text{FL}}$). It combines the evidence from both the target and flankers. During this early phase (Phase 1), the DSTP model assumes that both the central target and the flankers influence the decision-making process. 
+
+The DSTP framework incorporates an additional process known as stimulus selection (SS), which operates concurrently with Phase 1. This SS process helps determine which element, either the central target or a flanker, gets chosen for further processing in Phase 2. The SS process involves its own set of boundaries. When SS reaches one of these boundaries, it decides whether the central target or a flanker should be given more attention in Phase 2.
+
+Lastly, non-decisional operations, including stimulus encoding and motor response, are represented by the parameter t_er. In total, the DSTP model estimates seven parameters: A/B and C/D (boundary heights), $\mu_{\text{TA}}$ and $\mu_{\text{FL}}$ (drift rates in Phase 1), $\mu_{\text{SS}}$ (drift rate for stimulus selection), $\mu_{\text{RS2}}$ (drift rate in Phase 2), and $t_er$ (non-decision time).
+
+We fit the DSTP model to individual participant data using the `flanker` package (Grange, 2016). The models were fitted to trial-level RT and accuracy data. Successively, to assess whether model parameters were affected by the content of the video clips (surprising / not-surprising) presented prior to each sequence of 4 flanker task trials, a series of Bayesian regressions were conducted. 
+
+## Results
+
+### Modelling results
+
+The DSTP model [@hubner2010dual] was used to fit the empirical data.
+Two parameters of the DSTP model were affected by our experimental manipulation: $C$ and $\mu_{\text{FL}}$. The parameter $C$, which encodes the height of the boundary for the stimulus selection diffusion process, took on higher values in the surprise condition than in the control condition in the first block of trials. This difference decreased and disappeared in the following blocks of trials (Figure XX). The parameter $\mu_{\text{FL}}$, which encodes the drift rate for the flankers during the early stage of stimulus selection, was consistently lower in the surprise condition than in the control condition, although increased as a function of practice (i.e., block of trials) -- see Figure XX. None of the other parameters of the DSTP model were consistently affected by the surprise manipulation.
+
+
+
+## Discussion
+
+TODO Provide some measure of surprise.
+
+The presence of surprise during the performance of the flanker task exerts a profound impact on cognitive control, leading to a nuanced pattern of effects that evolve dynamically over time.
+
+Following exposure to the surprising video clip, participants initially exhibit a striking reversal of the conventional congruency effect (i.e., longer RTs for the congruent condition compared to the incongruent condition). This initial reversal suggests an immediate surge in cognitive control prompted by the surprise. In practical terms, it implies that, after experiencing the surprise, participants do not respond as swiftly to congruent trials as they typically would. The underlying mechanism here is that they enact a more conservative threshold for stimulus selection, necessitating stronger evidence before initiating a response.
+
+An analysis of the DSDP model indicates that the parameter, "C" which embodies the threshold for stimulus selection within the diffusion process, takes on higher values in the surprise condition compared to the control condition, particularly in the initial blocks of trials. This signifies that participants adopt a more cautious and conservative stance in their decision-making when surprised. In practical terms, setting a more conservative threshold implies that participants demand more compelling evidence or a more robust signal from the environment to trigger a response.
+
+Simultaneously, the DSDP model analysis reveals a lower $\mu_{\text{FL}}$ parameter in the surprise condition across all blocks of trials. This parameter signifies the rate at which information from the flankers is integrated into the decision-making process during the initial response selection phase. The lower $\mu_{\text{FL}}$ values indicate that, in the presence of surprise, participants exhibit reduced sensitivity to flanker information. Essentially, they process flanker information less efficiently and rapidly. This implies a prioritization of maintaining focused attention on the central task and achieving controlled and accurate responses.
+
+Our results also clarify the temporal dynamics of these effects. As participants adapt to the experimental context and the surprise manipulation, the heightened cognitive control, as indicated by the higher "C" parameter, gradually diminishes. This gradual adaptation accounts for the observed return of the congruency effect to a more typical pattern in later blocks of trials.
+
+In summary, our findings suggest that when participants encounter surprise, they initially embrace a more conservative approach to decision-making, reflected by the higher boundary parameter "C." This approach demands stronger evidence before initiating responses, resulting in slower reactions to congruent trials where expected evidence is readily available. The heightened threshold reflects their inclination to exercise caution in decision-making. However, as participants adapt to the task and the surprise manipulation, this heightened cognitive control effect diminishes over time, allowing the congruency effect to revert to a more typical pattern. In parallel, the lower $\mu_{\text{FL}}$ parameter implies a reduced sensitivity to flanker information, aligning with the concept that surprise bolsters cognitive control by minimizing the influence of potentially distracting stimuli.
+
+This interpretation underscores the dynamic nature of cognitive control in response to surprise, emphasizing how participants' initial responses to unexpected events shape their decision-making strategies and reaction times.
+
+\newpage
+
+The Cognitive-Evolutionary Model of Surprise, characterized by the detection of schema discrepancies and subsequent adaptation, can provide a framework for understanding your experimental results to some extent, but it may not fully account for all the observed effects. Let's analyze the compatibility of your results with this model:
+
+**(a) Detection of Schema Discrepancies**: 
+
+In your experiment, the surprising video clips featuring a magician performing tricks can be seen as potential schema discrepancies. When participants viewed these unexpected events, their cognitive schemas, or expectations about what they were about to see, were likely violated. This initial detection of schema discrepancies aligns with the first part of the Cognitive-Evolutionary Model of Surprise.
+
+**(b) Enable and Motivate Adaptation**:
+
+1. **Initial Heightened Cognitive Control**: The heightened cognitive control observed immediately after the surprise (reversed congruency effect) could be seen as an initial adaptive response. Participants might have engaged in more cautious and controlled cognitive processing to make sense of the surprising events and ensure accurate responses. This heightened cognitive control can be interpreted as an attempt to adapt to the unexpected stimuli.
+
+2. **Temporal Dynamics of Cognitive Control**: The gradual reduction in the heightened cognitive control effect over time, as indicated by the return of the congruency effect to a typical pattern, suggests a form of adaptation. Participants may have adjusted their cognitive strategies as they became more accustomed to the task and the surprise manipulation. This temporal dynamic aligns with the idea of long-term adaptation proposed by the Cognitive-Evolutionary Model of Surprise.
+
+However, it's essential to note that the Cognitive-Evolutionary Model of Surprise primarily emphasizes adaptation to unexpected events in the context of natural environments and survival-related scenarios. The model is often applied to situations involving real-world threats, where adaptation is critical for survival.
+
+In your experimental setup, the surprises were generated by a magician's tricks and were not directly related to survival or fundamental schema discrepancies required for immediate adaptation. Therefore, while your results do show some aspects of adaptation in response to surprise, they may not fully align with the model's original context.
+
+Additionally, the model's application to cognitive control in tasks involving simple stimuli like Gabor patches within a laboratory experiment might be a stretch. Cognitive control processes observed in these controlled tasks might be influenced by a broader range of factors, including task-specific strategies and cognitive mechanisms, than those typically associated with the Cognitive-Evolutionary Model of Surprise.
+
+In summary, your results show elements of adaptation to unexpected events, consistent with the Cognitive-Evolutionary Model of Surprise's principles. However, the model's application to a controlled laboratory task with non-survival-related stimuli might require careful consideration, and the observed effects may involve other cognitive processes specific to your experimental context.
+
+\newpage
+
+Designing a follow-up experiment to further test the conclusions of your previous study is an excellent idea. To refine and validate your findings, you should consider a manipulation that can provide additional insights and strengthen the robustness of your conclusions. Here are some potential manipulations to consider:
+
+1. **Manipulation of Surprise Intensity**: In your previous study, surprise was induced by video clips. You could vary the intensity of surprise by using different types of video clips or by exposing participants to more surprising events within the clips. This manipulation would allow you to explore how the degree of surprise influences cognitive control and whether it has a dose-dependent effect on the observed patterns.
+
+2. **Timing of Surprise**: You could manipulate when surprise is introduced relative to the flanker task. In your previous study, surprise preceded the task. Now, you might introduce surprise at different points during the task, such as during the presentation of flanker stimuli or after participants have already begun responding. This can help you understand how the timing of surprise impacts cognitive control dynamics.
+
+3. **Surprise vs. Other Emotions**: Compare the effects of surprise to those of other emotions, such as fear or joy. This comparison can elucidate whether the observed cognitive control changes are specific to surprise or generalize to other emotional states.
+
+4. **Individual Differences**: Investigate individual differences in response to surprise. You could assess whether certain personality traits, such as trait anxiety or openness to experience, modulate the impact of surprise on cognitive control. This would provide insights into who might be more or less affected by surprise.
+
+5. **Task Variants**: Create variations of the flanker task or use different cognitive control tasks to see if the effects of surprise hold across different domains of cognitive control. This can help validate that the observed effects are not task-specific.
+
+6. **Neuroimaging**: Incorporate neuroimaging techniques, such as fMRI or EEG, to investigate the neural mechanisms underlying the impact of surprise on cognitive control. This can provide physiological evidence supporting your behavioral findings.
+
+7. **Longitudinal Study**: Conduct a longitudinal study where participants are exposed to surprise or control conditions over an extended period. This approach can reveal how the effects of surprise on cognitive control evolve and whether they are stable or change with prolonged exposure.
+
+8. **Physiological Measures**: Besides behavioral measures, consider incorporating physiological measures like heart rate, skin conductance, or eye-tracking to provide additional insights into participants' emotional and attentional responses to surprise.
+
+9. **Contextual Factors**: Explore how contextual factors, such as the presence of others or the setting in which the surprise occurs, influence cognitive control. Context can play a significant role in how individuals respond to unexpected events.
+
+10. **Online vs. Offline Surprise**: Differentiate between surprise that occurs naturally in the environment (online) and surprise that is experimentally induced (offline). This can help determine whether naturally occurring surprises have similar effects on cognitive control.
+
+Ultimately, the choice of manipulation should align with your research goals and the specific questions you aim to answer. By carefully designing your follow-up experiment, you can further validate and refine your conclusions while deepening our understanding of the interplay between surprise and cognitive control.
+
+\newpage
+
+Novelty vs unexpectedness. Unexpected events are those that disconfirm expectations (beliefs); novel events are events that are not represented in the person’s schema or episodic event memory for the current situation (and possibly in no schema at all). 
+
+Here, the cause is unexpectedness. The videos are not novel.
+
+Outcome valence as a partial cause of surprise. No, the outcome valence is neutral in the present case.
+
+- eye movemnts: Events are looked at longer when they are surprising than when not (e.g., Horstmann & Herwig, 2015; Horstmann, Becker, & Ernst, 2016; Retell, Venini, & Becker, 2015, Exp. 1; see Horstmann, 2015). In our case, question whether the target is fixated longer in the surprise congruent condition.
+
+\newpage
+
+# References
+
+::: {#refs custom-style="Bibliography"}
+:::

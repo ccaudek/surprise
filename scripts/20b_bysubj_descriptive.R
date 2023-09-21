@@ -1,5 +1,5 @@
 #' ---
-#' title: "Variational Inference analysis on raw data"
+#' title: "Descriptive statistics"
 #' output:
 #'   pdf_document:
 #'     keep_tex: true
@@ -48,45 +48,10 @@ data_tidy |>
     n = n_distinct(subj_id)
   )
 
-
-
-#' Performace decrement
-
-mod1 <- brm(
-  correct ~ experiment + (1 | subj_id),
-  family = bernoulli(),
-  algorithm = "meanfield",
-  data = data_tidy
-)
-pp_check(mod1)
-
-summary(mod1)
-
-# More errors in the surprise experiment.
-
 #' Select correct trials by experiment
 
 dt_cor <- data_tidy |> 
   dplyr::filter(correct == 1)
-
-dt_cor |> 
-  group_by(experiment) |> 
-  summarise(
-    rt = median(rtTukey, na.rm = TRUE)
-  )
-
-mod2 <- brm(
-  rtTukey ~ experiment * block + (1 + block | subj_id),
-  family = shifted_lognormal(),
-  algorithm = "meanfield",
-  data = dt_cor
-)
-pp_check(mod2) # + xlim(-2, 2)
-
-marginal_effects(mod2, "experiment")
-
-summary(mod2)
-
 
 # Select correct trials of the surprise experiment
 surprise_cor_df <- dt_cor[dt_cor$experiment == "surprise", ]
@@ -102,6 +67,7 @@ control_cor_df$blk <- factor(control_cor_df$block)
 # control_cor_df <- control_cor_df[control_cor_df$is_clip_trial == "No", ]
 
 cntl_rt_diff_df <- control_cor_df %>%
+  dplyr::filter(trials_after_clip != 0) |> 
   group_by(subj_id, blk, is_congruent_trial) %>%
   summarise(mean_log_rt = mean(log(rtTukey), na.rm = TRUE)) %>%
   ungroup() %>%
@@ -113,15 +79,6 @@ cntl_rt_diff_df <- control_cor_df %>%
   ) %>%
   arrange(subj_id, blk)
 
-cntl_rt_diff_df |> 
-ggplot(aes(x = blk, y = ce, group = subj_id)) +
-  geom_line() +
-  # geom_point() +  # Add points for each data point
-  labs(
-    x = "Block",
-    y = "Congruency Effect",
-    title = "Congruency Effect by Block for Each Subject"
-  )
 
 cntl_rt_diff_df |>
   group_by(blk) |>
@@ -182,6 +139,7 @@ hypothesis(mod_cntl_1, hyp2)
 surprise_cor_df$blk <- factor(surprise_cor_df$block)
 
 rt_diff_df <- surprise_cor_df |>
+  dplyr::filter(trials_after_clip != 0) |> 
   group_by(subj_id, blk, is_surprise_clip, is_congruent_trial) |>
   summarise(mean_log_rt = mean(log(rtTukey), na.rm = TRUE)) |>
   ungroup() |>
@@ -193,17 +151,6 @@ rt_diff_df <- surprise_cor_df |>
   ) %>%
   arrange(subj_id, blk, is_surprise_clip) |>
   ungroup()
-
-rt_diff_df |>
-  ggplot(aes(x = blk, y = ce, group = subj_id)) +
-  geom_line() +
-  facet_wrap(~ is_surprise_clip) +
-  labs(
-    x = "Block",
-    y = "Congruency Effect",
-    title = "Congruency Effect by Block for Each Subject"
-  )
-
 
 rt_diff_df |>
   group_by(is_surprise_clip, blk) |>

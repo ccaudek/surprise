@@ -1,0 +1,375 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  man]{apa7}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+% Make \paragraph and \subparagraph free-standing
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newlength{\cslentryspacingunit} % times entry-spacing
+\setlength{\cslentryspacingunit}{\parskip}
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+  \let\oldpar\par
+  \def\par{\hangindent=\cslhangindent\oldpar}
+  \fi
+  % set entry spacing
+  \setlength{\parskip}{#2\cslentryspacingunit}
+ }%
+ {}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+\ifLuaTeX
+\usepackage[bidi=basic]{babel}
+\else
+\usepackage[bidi=default]{babel}
+\fi
+\babelprovide[main,import]{english}
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
+% Manuscript styling
+\usepackage{upgreek}
+\captionsetup{font=singlespacing,justification=justified}
+
+% Table formatting
+\usepackage{longtable}
+\usepackage{lscape}
+% \usepackage[counterclockwise]{rotating}   % Landscape page setup for large tables
+\usepackage{multirow}		% Table styling
+\usepackage{tabularx}		% Control Column width
+\usepackage[flushleft]{threeparttable}	% Allows for three part tables with a specified notes section
+\usepackage{threeparttablex}            % Lets threeparttable work with longtable
+
+% Create new environments so endfloat can handle them
+% \newenvironment{ltable}
+%   {\begin{landscape}\centering\begin{threeparttable}}
+%   {\end{threeparttable}\end{landscape}}
+\newenvironment{lltable}{\begin{landscape}\centering\begin{ThreePartTable}}{\end{ThreePartTable}\end{landscape}}
+
+% Enables adjusting longtable caption width to table width
+% Solution found at http://golatex.de/longtable-mit-caption-so-breit-wie-die-tabelle-t15767.html
+\makeatletter
+\newcommand\LastLTentrywidth{1em}
+\newlength\longtablewidth
+\setlength{\longtablewidth}{1in}
+\newcommand{\getlongtablewidth}{\begingroup \ifcsname LT@\roman{LT@tables}\endcsname \global\longtablewidth=0pt \renewcommand{\LT@entry}[2]{\global\advance\longtablewidth by ##2\relax\gdef\LastLTentrywidth{##2}}\@nameuse{LT@\roman{LT@tables}} \fi \endgroup}
+
+% \setlength{\parindent}{0.5in}
+% \setlength{\parskip}{0pt plus 0pt minus 0pt}
+
+% Overwrite redefinition of paragraph and subparagraph by the default LaTeX template
+% See https://github.com/crsh/papaja/issues/292
+\makeatletter
+\renewcommand{\paragraph}{\@startsection{paragraph}{4}{\parindent}%
+  {0\baselineskip \@plus 0.2ex \@minus 0.2ex}%
+  {-1em}%
+  {\normalfont\normalsize\bfseries\itshape\typesectitle}}
+
+\renewcommand{\subparagraph}[1]{\@startsection{subparagraph}{5}{1em}%
+  {0\baselineskip \@plus 0.2ex \@minus 0.2ex}%
+  {-\z@\relax}%
+  {\normalfont\normalsize\itshape\hspace{\parindent}{#1}\textit{\addperi}}{\relax}}
+\makeatother
+
+% \usepackage{etoolbox}
+\makeatletter
+\patchcmd{\HyOrg@maketitle}
+  {\section{\normalfont\normalsize\abstractname}}
+  {\section*{\normalfont\normalsize\abstractname}}
+  {}{\typeout{Failed to patch abstract.}}
+\patchcmd{\HyOrg@maketitle}
+  {\section{\protect\normalfont{\@title}}}
+  {\section*{\protect\normalfont{\@title}}}
+  {}{\typeout{Failed to patch title.}}
+\makeatother
+
+\usepackage{xpatch}
+\makeatletter
+\xapptocmd\appendix
+  {\xapptocmd\section
+    {\addcontentsline{toc}{section}{\appendixname\ifoneappendix\else~\theappendix\fi\\: #1}}
+    {}{\InnerPatchFailed}%
+  }
+{}{\PatchFailed}
+\keywords{keywords\newline\indent Word count: X}
+\DeclareDelayedFloatFlavor{ThreePartTable}{table}
+\DeclareDelayedFloatFlavor{lltable}{table}
+\DeclareDelayedFloatFlavor*{longtable}{table}
+\makeatletter
+\renewcommand{\efloat@iwrite}[1]{\immediate\expandafter\protected@write\csname efloat@post#1\endcsname{}}
+\makeatother
+\usepackage{lineno}
+
+\linenumbers
+\usepackage{csquotes}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={The effect of surprise on cognitive control},
+  pdfauthor={Francesco Ceccarini1, Ilaria Colpizzi1, Claudio Sica2, \& Corrado Caudek1},
+  pdflang={en-EN},
+  pdfkeywords={keywords},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{The effect of surprise on cognitive control}
+\author{Francesco Ceccarini\textsuperscript{1}, Ilaria Colpizzi\textsuperscript{1}, Claudio Sica\textsuperscript{2}, \& Corrado Caudek\textsuperscript{1}}
+\date{}
+
+
+\shorttitle{Surprise and cognitive control}
+
+\authornote{
+
+Add complete departmental affiliations for each author here. Each new line herein must be indented, like this line.
+
+Enter author note here.
+
+The authors made the following contributions. Francesco Ceccarini: Conceptualization, Writing - Original Draft Preparation, Writing - Review \& Editing; Corrado Caudek: Conceptualization, Writing - Original Draft Preparation, Writing - Review \& Editing.
+
+Correspondence concerning this article should be addressed to Corrado Caudek, NEUROFARBA Department, Psychology Section, University of Firenze, Italy. E-mail: \href{mailto:corrado.caudek@unifi.it}{\nolinkurl{corrado.caudek@unifi.it}}
+
+}
+
+\affiliation{\vspace{0.5cm}\textsuperscript{1} NEUROFARBA Department, Psychology Section, University of Florence, Italy\\\textsuperscript{2} Health Sciences Department, Psychology Section, University of Florence, Italy}
+
+\abstract{%
+This study investigates \ldots{}
+}
+
+
+
+\begin{document}
+\maketitle
+
+\hypertarget{purpose-of-the-study}{%
+\subsection{Purpose of the study}\label{purpose-of-the-study}}
+
+The purpose of this study is to \ldots{}
+
+\hypertarget{methods}{%
+\section{Methods}\label{methods}}
+
+\hypertarget{sample-size}{%
+\subsection{Sample size}\label{sample-size}}
+
+\hypertarget{participants}{%
+\subsection{Participants}\label{participants}}
+
+\hypertarget{material}{%
+\subsection{Material}\label{material}}
+
+\hypertarget{procedure}{%
+\subsection{Procedure}\label{procedure}}
+
+\hypertarget{data-analysis}{%
+\subsection{Data analysis}\label{data-analysis}}
+
+\hypertarget{statistical-analyses}{%
+\subsection{Statistical analyses}\label{statistical-analyses}}
+
+\hypertarget{quality-checks-and-data-exclusion}{%
+\subsubsection{Quality checks and data exclusion}\label{quality-checks-and-data-exclusion}}
+
+Prior to data analysis, we implemented a series of data quality assessments. Specifically, participants exhibiting a mean accuracy score below 80\% were excluded from the analysis. In the context of reaction time (RT) analysis, error trials were eliminated, and RT values falling below 250 ms or exceeding 1500 ms were trimmed from the dataset.
+
+\hypertarget{analytical-strategy}{%
+\subsubsection{Analytical strategy}\label{analytical-strategy}}
+
+We performed all inferential analyses using Bayesian regression implemented with the brms package (Bürkner, 2017) in R (R Core Team, 2017). In all our analyses, we employed the default regularizing priors provided by the brms package. Predictor variables were considered has having a credible effect if their 95\% credible intervals (CI) did not encompass zero.
+
+\hypertarget{modelling-attentional-selectivity}{%
+\subsubsection{Modelling attentional selectivity}\label{modelling-attentional-selectivity}}
+
+In order to gain a more comprehensive understanding of the impact of surprise on performance in the flanker task, we employed the dual-stage two-phase (DSTP) model proposed by Hübner, Steinhauser, and Lehle (2010). This model was designed to simultaneously account for both reaction time (RT) and accuracy performance, thereby enabling us to capture the complete dynamics of attentional selectivity in our analysis. It is worth noting that other models have been developed to explore how conflicting information influences decision-making within the context of the flanker task, including the shrinking spotlight model by White et al. (White, Ratcliff, \& Starns, 2011), and the diffusion model for conflict tasks (DMC) (Ulrich, Schröter, Leuthold, \& Birngruber, 2015). In our current study, we opted for the DSTP model for several reasons. First, in a direct comparison conducted by Evans and Servant (2020), it was demonstrated that, when applied to flanker task data, the DMC model yielded a poorer fit to the observed data compared to both the DSTP and SPS models, whereas the DSTP and SPS models exhibited comparable goodness of fit. Our preference for the DSTP model over the SPS model was motivated by the fact that the parameters of the DSTP model offer a more direct insight into the processing distinctions between the target stimulus and the flanking stimuli, which aligns closely with the primary focus of our investigation.
+
+The DSTP model, along with the SPS and DMC models, operates on the assumption that response selection follows a drift-diffusion process. This process is divided into two phases, each represented by a diffusion process. A diffusion process is characterized by a drift rate parameter reflecting evidence for response options, along with boundary parameters indicating response boundaries. The model's response accuracy depends on which boundary is reached, while the time to reach the boundary corresponds to RT.
+
+TODO Parameter A!!
+
+The parameter ``C'' represents the threshold or boundary that must be reached before a decision is made. In simpler terms, it's like a decision-making threshold that participants establish for themselves. When sensory evidence accumulates and reaches this threshold, a response is initiated.
+
+The DSTP model divides the process of making a response into two phases. These phases represent different stages of decision-making. In the first phase of response selection, the brain gathers information from the sensory input, which includes both the central target and the surrounding flankers. Within this first phase, the model considers two pieces of information: the central target (\(\mu_{\text{TA}}\)) and the flankers (\(\mu_{\text{FL}}\)). The total rate of evidence accumulation in Phase 1 is represented as \(\mu_{\text{RS1}}\) is the sum of the drift rates for the central target (\(\mu_{\text{TA}}\)) and the flankers (\(\mu_{\text{FL}}\)). It combines the evidence from both the target and flankers. During this early phase (Phase 1), the DSTP model assumes that both the central target and the flankers influence the decision-making process.
+
+The DSTP framework incorporates an additional process known as stimulus selection (SS), which operates concurrently with Phase 1. This SS process helps determine which element, either the central target or a flanker, gets chosen for further processing in Phase 2. The SS process involves its own set of boundaries. When SS reaches one of these boundaries, it decides whether the central target or a flanker should be given more attention in Phase 2.
+
+Lastly, non-decisional operations, including stimulus encoding and motor response, are represented by the parameter t\_er. In total, the DSTP model estimates seven parameters: A/B and C/D (boundary heights), \(\mu_{\text{TA}}\) and \(\mu_{\text{FL}}\) (drift rates in Phase 1), \(\mu_{\text{SS}}\) (drift rate for stimulus selection), \(\mu_{\text{RS2}}\) (drift rate in Phase 2), and \(t_er\) (non-decision time).
+
+We fit the DSTP model to individual participant data using the \texttt{flanker} package (Grange, 2016). The models were fitted to trial-level RT and accuracy data. Successively, to assess whether model parameters were affected by the content of the video clips (surprising / not-surprising) presented prior to each sequence of 4 flanker task trials, a series of Bayesian regressions were conducted.
+
+\hypertarget{results}{%
+\subsection{Results}\label{results}}
+
+\hypertarget{modelling-results}{%
+\subsubsection{Modelling results}\label{modelling-results}}
+
+The DSTP model (Hübner et al., 2010) was used to fit the empirical data.
+Two parameters of the DSTP model were affected by our experimental manipulation: \(C\) and \(\mu_{\text{FL}}\). The parameter \(C\), which encodes the height of the boundary for the stimulus selection diffusion process, took on higher values in the surprise condition than in the control condition in the first block of trials. This difference decreased and disappeared in the following blocks of trials (Figure XX). The parameter \(\mu_{\text{FL}}\), which encodes the drift rate for the flankers during the early stage of stimulus selection, was consistently lower in the surprise condition than in the control condition, although increased as a function of practice (i.e., block of trials) -- see Figure XX. None of the other parameters of the DSTP model were consistently affected by the surprise manipulation.
+
+\hypertarget{discussion}{%
+\subsection{Discussion}\label{discussion}}
+
+The presence of surprise during the performance of the flanker task exerts a profound impact on cognitive control, leading to a nuanced pattern of effects that evolve dynamically over time.
+
+Following exposure to the surprising video clip, participants initially exhibit a striking reversal of the conventional congruency effect (i.e., longer RTs for the congruent condition compared to the incongruent condition). This initial reversal suggests an immediate surge in cognitive control prompted by the surprise. In practical terms, it implies that, after experiencing the surprise, participants do not respond as swiftly to congruent trials as they typically would. The underlying mechanism here is that they enact a more conservative threshold for stimulus selection, necessitating stronger evidence before initiating a response.
+
+An analysis of the DSDP model indicates that the parameter, ``C'' which embodies the threshold for stimulus selection within the diffusion process, takes on higher values in the surprise condition compared to the control condition, particularly in the initial blocks of trials. This signifies that participants adopt a more cautious and conservative stance in their decision-making when surprised. In practical terms, setting a more conservative threshold implies that participants demand more compelling evidence or a more robust signal from the environment to trigger a response.
+
+Simultaneously, the DSDP model analysis reveals a lower \(\mu_{\text{FL}}\) parameter in the surprise condition across all blocks of trials. This parameter signifies the rate at which information from the flankers is integrated into the decision-making process during the initial response selection phase. The lower \(\mu_{\text{FL}}\) values indicate that, in the presence of surprise, participants exhibit reduced sensitivity to flanker information. Essentially, they process flanker information less efficiently and rapidly. This implies a prioritization of maintaining focused attention on the central task and achieving controlled and accurate responses.
+
+Our results also clarify the temporal dynamics of these effects. As participants adapt to the experimental context and the surprise manipulation, the heightened cognitive control, as indicated by the higher ``C'' parameter, gradually diminishes. This gradual adaptation accounts for the observed return of the congruency effect to a more typical pattern in later blocks of trials.
+
+In summary, our findings suggest that when participants encounter surprise, they initially embrace a more conservative approach to decision-making, reflected by the higher boundary parameter ``C.'' This approach demands stronger evidence before initiating responses, resulting in slower reactions to congruent trials where expected evidence is readily available. The heightened threshold reflects their inclination to exercise caution in decision-making. However, as participants adapt to the task and the surprise manipulation, this heightened cognitive control effect diminishes over time, allowing the congruency effect to revert to a more typical pattern. In parallel, the lower \(\mu_{\text{FL}}\) parameter implies a reduced sensitivity to flanker information, aligning with the concept that surprise bolsters cognitive control by minimizing the influence of potentially distracting stimuli.
+
+This interpretation underscores the dynamic nature of cognitive control in response to surprise, emphasizing how participants' initial responses to unexpected events shape their decision-making strategies and reaction times.
+
+\newpage
+
+The Cognitive-Evolutionary Model of Surprise, characterized by the detection of schema discrepancies and subsequent adaptation, can provide a framework for understanding your experimental results to some extent, but it may not fully account for all the observed effects. Let's analyze the compatibility of your results with this model:
+
+\textbf{(a) Detection of Schema Discrepancies}:
+
+In your experiment, the surprising video clips featuring a magician performing tricks can be seen as potential schema discrepancies. When participants viewed these unexpected events, their cognitive schemas, or expectations about what they were about to see, were likely violated. This initial detection of schema discrepancies aligns with the first part of the Cognitive-Evolutionary Model of Surprise.
+
+\textbf{(b) Enable and Motivate Adaptation}:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Initial Heightened Cognitive Control}: The heightened cognitive control observed immediately after the surprise (reversed congruency effect) could be seen as an initial adaptive response. Participants might have engaged in more cautious and controlled cognitive processing to make sense of the surprising events and ensure accurate responses. This heightened cognitive control can be interpreted as an attempt to adapt to the unexpected stimuli.
+\item
+  \textbf{Temporal Dynamics of Cognitive Control}: The gradual reduction in the heightened cognitive control effect over time, as indicated by the return of the congruency effect to a typical pattern, suggests a form of adaptation. Participants may have adjusted their cognitive strategies as they became more accustomed to the task and the surprise manipulation. This temporal dynamic aligns with the idea of long-term adaptation proposed by the Cognitive-Evolutionary Model of Surprise.
+\end{enumerate}
+
+However, it's essential to note that the Cognitive-Evolutionary Model of Surprise primarily emphasizes adaptation to unexpected events in the context of natural environments and survival-related scenarios. The model is often applied to situations involving real-world threats, where adaptation is critical for survival.
+
+In your experimental setup, the surprises were generated by a magician's tricks and were not directly related to survival or fundamental schema discrepancies required for immediate adaptation. Therefore, while your results do show some aspects of adaptation in response to surprise, they may not fully align with the model's original context.
+
+Additionally, the model's application to cognitive control in tasks involving simple stimuli like Gabor patches within a laboratory experiment might be a stretch. Cognitive control processes observed in these controlled tasks might be influenced by a broader range of factors, including task-specific strategies and cognitive mechanisms, than those typically associated with the Cognitive-Evolutionary Model of Surprise.
+
+In summary, your results show elements of adaptation to unexpected events, consistent with the Cognitive-Evolutionary Model of Surprise's principles. However, the model's application to a controlled laboratory task with non-survival-related stimuli might require careful consideration, and the observed effects may involve other cognitive processes specific to your experimental context.
+
+\newpage
+
+Designing a follow-up experiment to further test the conclusions of your previous study is an excellent idea. To refine and validate your findings, you should consider a manipulation that can provide additional insights and strengthen the robustness of your conclusions. Here are some potential manipulations to consider:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Manipulation of Surprise Intensity}: In your previous study, surprise was induced by video clips. You could vary the intensity of surprise by using different types of video clips or by exposing participants to more surprising events within the clips. This manipulation would allow you to explore how the degree of surprise influences cognitive control and whether it has a dose-dependent effect on the observed patterns.
+\item
+  \textbf{Timing of Surprise}: You could manipulate when surprise is introduced relative to the flanker task. In your previous study, surprise preceded the task. Now, you might introduce surprise at different points during the task, such as during the presentation of flanker stimuli or after participants have already begun responding. This can help you understand how the timing of surprise impacts cognitive control dynamics.
+\item
+  \textbf{Surprise vs.~Other Emotions}: Compare the effects of surprise to those of other emotions, such as fear or joy. This comparison can elucidate whether the observed cognitive control changes are specific to surprise or generalize to other emotional states.
+\item
+  \textbf{Individual Differences}: Investigate individual differences in response to surprise. You could assess whether certain personality traits, such as trait anxiety or openness to experience, modulate the impact of surprise on cognitive control. This would provide insights into who might be more or less affected by surprise.
+\item
+  \textbf{Task Variants}: Create variations of the flanker task or use different cognitive control tasks to see if the effects of surprise hold across different domains of cognitive control. This can help validate that the observed effects are not task-specific.
+\item
+  \textbf{Neuroimaging}: Incorporate neuroimaging techniques, such as fMRI or EEG, to investigate the neural mechanisms underlying the impact of surprise on cognitive control. This can provide physiological evidence supporting your behavioral findings.
+\item
+  \textbf{Longitudinal Study}: Conduct a longitudinal study where participants are exposed to surprise or control conditions over an extended period. This approach can reveal how the effects of surprise on cognitive control evolve and whether they are stable or change with prolonged exposure.
+\item
+  \textbf{Physiological Measures}: Besides behavioral measures, consider incorporating physiological measures like heart rate, skin conductance, or eye-tracking to provide additional insights into participants' emotional and attentional responses to surprise.
+\item
+  \textbf{Contextual Factors}: Explore how contextual factors, such as the presence of others or the setting in which the surprise occurs, influence cognitive control. Context can play a significant role in how individuals respond to unexpected events.
+\item
+  \textbf{Online vs.~Offline Surprise}: Differentiate between surprise that occurs naturally in the environment (online) and surprise that is experimentally induced (offline). This can help determine whether naturally occurring surprises have similar effects on cognitive control.
+\end{enumerate}
+
+Ultimately, the choice of manipulation should align with your research goals and the specific questions you aim to answer. By carefully designing your follow-up experiment, you can further validate and refine your conclusions while deepening our understanding of the interplay between surprise and cognitive control.
+
+\newpage
+
+\hypertarget{references}{%
+\section{References}\label{references}}
+
+\hypertarget{refs}{}
+\begin{CSLReferences}{1}{0}
+\leavevmode\vadjust pre{\hypertarget{ref-evans2020comparison}{}}%
+Evans, N. J., \& Servant, M. (2020). A comparison of conflict diffusion models in the flanker task through pseudolikelihood bayes factors. \emph{Psychological Review}, \emph{127}(1), 114--135.
+
+\leavevmode\vadjust pre{\hypertarget{ref-hubner2010dual}{}}%
+Hübner, R., Steinhauser, M., \& Lehle, C. (2010). A dual-stage two-phase model of selective attention. \emph{Psychological Review}, \emph{117}(3), 759--784.
+
+\leavevmode\vadjust pre{\hypertarget{ref-ulrich2015automatic}{}}%
+Ulrich, R., Schröter, H., Leuthold, H., \& Birngruber, T. (2015). Automatic and controlled stimulus processing in conflict tasks: Superimposed diffusion processes and delta functions. \emph{Cognitive Psychology}, \emph{78}, 148--174.
+
+\leavevmode\vadjust pre{\hypertarget{ref-white2011diffusion}{}}%
+White, C. N., Ratcliff, R., \& Starns, J. J. (2011). Diffusion models of the flanker task: Discrete versus gradual attentional selection. \emph{Cognitive Psychology}, \emph{63}(4), 210--238.
+
+\end{CSLReferences}
+
+
+\end{document}

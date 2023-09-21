@@ -30,7 +30,6 @@ source(here("libraries", "functions.R"))
 
 #' Import complete data set
 
-
 #' Import the data that have been created by the previous scripts. The data 
 #' have been created with the 01_, 10_, 11_ scripts in the present directory.
 
@@ -41,26 +40,9 @@ data <- get_data()
 
 data_tidy <- tidy_flanker(data)
 
-#' Perform some participants' flanker checks.
-
-flanker_accuracy_overall <- get_flanker_accuracy(data_tidy, overall = TRUE)
-
-#' Get a list of participants who scored below 80% accuracy.
-
-accuracy_removal <- flanker_accuracy_overall |> 
-  filter(accuracy < 0.80) |> 
-  pull(subj_id)
-
-length(accuracy_removal)
-
-#' Remove the <80% accuracy participants from the flanker data.
-
-flanker_data <- data_tidy |> 
-  filter(!subj_id %in% accuracy_removal)
-
 #' Check number of subjects by condition.
 
-flanker_data |>
+data_tidy |>
   group_by(experiment, is_surprise_clip) |>
   summarize(
     n = n_distinct(subj_id)
@@ -69,23 +51,8 @@ flanker_data |>
 
 #' Select correct trials only
 
-dt_cor <- flanker_data |> 
+dt_cor <- data_tidy |> 
   dplyr::filter(correct == 1)
-
-nrow_total <- nrow(dt_cor)
-
-#' Remove missing data on rt.
-
-dt_cor <- dt_cor[!is.na(dt_cor$rt), ]
-
-nrow_na_removed <- nrow(dt_cor)
-
-# percent removed
-(1 - nrow_na_removed / nrow_total) * 100
-
-nrow_total - nrow_na_removed  
-
-nrow_total
 
 
 #' Select correct trials by experiment
@@ -121,14 +88,14 @@ d <- surprise_cor_df |>
 #' Response time
 
 #' Baseline model
-#' ex-gaussian produces a better fit that asym-laplace
+#' ex-gaussian fails.
 
 m0 <- brm(
   bf(
     zrt ~ 1 + (1 | subj_id) + (1 | movie_id)
   ), 
   algorithm = "meanfield",
-  family = exgaussian(),
+  family = asym_laplace(),
   iter = 20000, # Increase the number of iterations
   data = d
 )
@@ -142,7 +109,7 @@ m1 <- brm(
        (1 | subj_id) + (1 | movie_id)
   ), 
   algorithm = "meanfield",
-  family = exgaussian(),
+  family = asym_laplace(),
   iter = 20000, 
   data = d
 )
@@ -168,7 +135,6 @@ loo_m2 <- loo(m2)
 
 comp <- loo_compare(loo_m1, loo_m2)
 print(comp, digits = 2)
-
 
 print(loo_m2)
 
@@ -201,11 +167,11 @@ print(loo_m3)
 #' Test whether the kind of video is important within the surprise experiment.
 
 m4 <- brm(
-  bf(zrt ~ CT * BL +
-       (1 + CT * BL | subj_id) + (1 | movie_id)
+  bf(zrt ~ CT * BF +
+       (1 + CT * BF | subj_id) + (1 | movie_id)
   ), 
   algorithm = "meanfield",
-  family = exgaussian(),
+  family = asym_laplace(),
   iter = 20000, 
   init = 0.1,
   data = d
@@ -213,18 +179,18 @@ m4 <- brm(
 loo_m4 <- loo(m4)
 
 
-comp <- loo_compare(loo_m3, loo_m4)
+comp <- loo_compare(loo_m2, loo_m4)
 print(comp, digits = 2)
 
 
 #' Remove the three-way interaction
 
 m5 <- brm(
-  bf(zrt ~ CT * SC + CT * BL + SC * BL + 
-       (1 + CT * SC + CT * BL + SC * BL | subj_id) + (1 | movie_id)
+  bf(zrt ~ CT * SC + CT * BF + SC * BF + 
+       (1 + CT * SC + CT * BF + SC * BF | subj_id) + (1 | movie_id)
   ), 
   algorithm = "meanfield",
-  family = brms::exgaussian(),
+  family = asym_laplace(),
   iter = 20000, # Increase the number of iterations
   init = 0.1,
   data = d
@@ -232,7 +198,7 @@ m5 <- brm(
 loo_m5 <- loo(m5)
 
 # Test of the three-way interaction
-comp <- loo_compare(loo_m3, loo_m5)
+comp <- loo_compare(loo_m2, loo_m5)
 print(comp, digits = 2)
 
 
